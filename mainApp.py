@@ -26,10 +26,12 @@ def fileOrganizer(allFiles):
             k=0
     
 
-def scanFiles():
+def scanFiles(second=False):
     files=[]
     for root,drs,fls in os.walk("."):
         for fl in fls:
+            if second == True and not "9351" in fl:
+                continue
             try:
                 if os.path.isfile(fl):
                     fullfl=os.path.abspath(os.path.join(root,fl))
@@ -70,7 +72,8 @@ def main():
     files = scanFiles()
 
     mainEngine(files)
-    
+
+    os.system("find . -type d -empty -delete")
 
 
 if __name__ == "__main__":
