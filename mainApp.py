@@ -43,7 +43,7 @@ def scanFiles(second=False):
 def loadNames():
     global names
 
-    with open("/home/vamshi/names.txt","r") as fl:
+    with open("/home/vamshi/.names.txt","r") as fl:
         for ln in fl:
             names.append(ln[:-1])
 
@@ -65,6 +65,7 @@ def mainEngine(files):
 
 def main():
 
+
     os.chdir(sys.argv[1])
 
     loadNames()
@@ -75,6 +76,12 @@ def main():
 
     os.system("find . -type d -empty -delete")
 
+    if os.path.isdir("FILTER"):
+        os.chdir("FILTER")
+        files = scanFiles(True)
+        mainEngine(files)
+
+    os.system("find FILTER -type d -empty -delete")
 
 if __name__ == "__main__":
     main()
